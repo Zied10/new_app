@@ -1,12 +1,13 @@
 NewApp::Application.routes.draw do
   get "users/new"
-  get "static_pages/home"
-  get "static_pages/help"
-  get "static_pages/about"
-resources :users
-root to: 'static_pages#home'
+  resources :users
 
-get '/signup' => 'users#new', :us => 'signup'
+  root to: 'static_pages#home' , via: [:get, :post]
+
+  match '/signup', to: 'users#new' , via: [:get, :post]
+  match '/help',    to: 'static_pages#help' , via: [:get, :post]
+  match '/about',   to: 'static_pages#about' , via: [:get, :post]
+  match '/contact', to: 'static_pages#contact' , via: [:get, :post]
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
